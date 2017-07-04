@@ -13,7 +13,7 @@ class CreateTaskViewController: UIViewController {
     @IBOutlet weak var taskNameTF: UITextField!
     @IBOutlet weak var importantSwitch: UISwitch!
     
-    var  previousVC = TasksViewController()
+   var  previousVC = TasksViewController()
     
     
     
@@ -23,14 +23,21 @@ class CreateTaskViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    
     @IBAction func addMeBtn(_ sender: Any) {
         //Create a task with outlet info 
         let task = Task()
         task.name = taskNameTF.text!
         task.important = importantSwitch.isOn
+        
+     
         //add new task
+        previousVC.tasks.append(task)
+        previousVC.tasksTV.reloadData()
+        navigationController!.popViewController(animated: true)
+ 
     }
 
-    
+
 
 }
