@@ -12,25 +12,25 @@ class CompleteTaskViewController: UIViewController {
     
     @IBOutlet weak var tasLbl: UILabel!
     
-    var task = Task()
-    var  previousVC = TasksViewController()
+    var task : Task? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if task.important == true {
-            tasLbl.text = "\(task.name)    💣"
+        if task?.important == true {
+            tasLbl.text = "\(task!.name!)    💣"
         }
         
-        if task.important == false {
-            tasLbl.text = task.name
+        if task?.important == false {
+            tasLbl.text = task!.name!
         }
         
         // Do any additional setup after loading the view.
     }
 
     @IBAction func completedBtn(_ sender: Any) {
-        previousVC.tasks.remove(at: previousVC.selectedIndex)
-        previousVC.tasksTV.reloadData()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        context.delete(task!)
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         navigationController!.popViewController(animated: true)
     }
 

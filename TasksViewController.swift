@@ -14,15 +14,19 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var tasksTV: UITableView!
     
     var tasks : [Task] = []
-    var selectedIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tasks = makeTasks()
-
         tasksTV.dataSource = self
         tasksTV.delegate = self
+    }
+    
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getTask()
+        tasksTV.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,52 +38,47 @@ class TasksViewController: UIViewController, UITableViewDataSource, UITableViewD
         let task = tasks[indexPath.row]
         
         if task.important == true {
-        cell.textLabel?.text = "\(task.name)    💣"
+        cell.textLabel?.text = "\(task.name!)      👹💣"
+        //cell.backgroundColor = UIColor.purple
+        // Encontrar como cambiar el fuenta a blanca....
         }
         
         if task.important == false {
-            cell.textLabel?.text = task.name
+            cell.textLabel?.text = task.name!
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
         let task = tasks[indexPath.row]
         performSegue(withIdentifier: "ShowTaskSegue", sender: task)
     }
     
-    func makeTasks() -> [Task] {
-        let task1 = Task()
-        task1.name = "Go to antos house"
-        task1.important = false
-        
-        let task2 = Task()
-        task2.name = "Buy cake for antos house"
-        task2.important = true
-        
-        let task3 = Task()
-        task3.name = "Go for the Desktop"
-        task3.important = true
-        
-        return [task1, task2, task1]
-    }
+    
 
     @IBAction func Addbtn(_ sender: Any) {
         performSegue(withIdentifier: "addSegue", sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func getTask() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+        do {
+            tasks = try context.fetch(Task.fetchRequest()) as! [Task]
+            print(tasks)
         
-        if segue.identifier == "addSegue" {
-            let nextVC = segue.destination as! CreateTaskViewController
-            nextVC.previousVC = self
+        } catch {
+            
+            print("Bad thingy in the request catch")
         }
-        
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
         if segue.identifier == "ShowTaskSegue" {
             let nextVC = segue.destination as! CompleteTaskViewController
-            nextVC.task = sender as! Task
-            nextVC.previousVC = self
+            nextVC.task = sender as? Task
 
         }
         

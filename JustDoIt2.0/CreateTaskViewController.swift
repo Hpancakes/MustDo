@@ -13,9 +13,6 @@ class CreateTaskViewController: UIViewController {
     @IBOutlet weak var taskNameTF: UITextField!
     @IBOutlet weak var importantSwitch: UISwitch!
     
-   var  previousVC = TasksViewController()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +23,15 @@ class CreateTaskViewController: UIViewController {
     
     @IBAction func addMeBtn(_ sender: Any) {
         //Create a task with outlet info 
-        let task = Task()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let task = Task(context: context)
         task.name = taskNameTF.text!
         task.important = importantSwitch.isOn
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
      
-        //add new task
-        previousVC.tasks.append(task)
-        previousVC.tasksTV.reloadData()
+        //Popo Back
+
         navigationController!.popViewController(animated: true)
  
     }
