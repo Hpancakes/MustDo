@@ -46,6 +46,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tasksTV" destination="1cg-j2-MM2" id="Atj-Bk-RZH"/>
+                        <segue destination="sEi-dn-e6v" kind="show" identifier="ShowTaskSegue" id="IG6-EC-ieM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -153,6 +154,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oes-Sj-G1v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2172" y="-645.42728635682158"/>
+        </scene>
+        <!--Complete Task View Controller-->
+        <scene sceneID="fVo-Md-Y7d">
+            <objects>
+                <viewController id="sEi-dn-e6v" customClass="CompleteTaskViewController" customModule="JustDoIt2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mmn-LG-qKy"/>
+                        <viewControllerLayoutGuide type="bottom" id="eIU-Ih-JcF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sp8-T9-UMa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cwr-et-1gv">
+                                <rect key="frame" x="45" y="72" width="285" height="106"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="106" id="wLX-Fc-aYg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwT-9I-48c">
+                                <rect key="frame" x="124" y="228" width="127" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="FINISHHH!!"/>
+                                <connections>
+                                    <action selector="completedBtn:" destination="sEi-dn-e6v" eventType="touchUpInside" id="51u-JO-3zW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xwT-9I-48c" firstAttribute="centerX" secondItem="Sp8-T9-UMa" secondAttribute="centerX" id="4Oy-mj-guS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Cwr-et-1gv" secondAttribute="trailing" constant="29" id="YEJ-ff-Tau"/>
+                            <constraint firstItem="Cwr-et-1gv" firstAttribute="centerX" secondItem="Sp8-T9-UMa" secondAttribute="centerX" id="a0p-w5-cms"/>
+                            <constraint firstItem="Cwr-et-1gv" firstAttribute="top" secondItem="Mmn-LG-qKy" secondAttribute="bottom" constant="8" id="hF4-ru-xnh"/>
+                            <constraint firstItem="Cwr-et-1gv" firstAttribute="leading" secondItem="Sp8-T9-UMa" secondAttribute="leadingMargin" constant="29" id="m38-iZ-pm6"/>
+                            <constraint firstItem="Cwr-et-1gv" firstAttribute="centerX" secondItem="Sp8-T9-UMa" secondAttribute="centerX" id="u4X-xG-2xc"/>
+                            <constraint firstItem="xwT-9I-48c" firstAttribute="top" secondItem="Cwr-et-1gv" secondAttribute="bottom" constant="50" id="vAP-TG-y40"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tasLbl" destination="Cwr-et-1gv" id="hGI-4v-QRm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g5x-Vq-Xtg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2172" y="78"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4UH-i9-DEu">
